@@ -69,6 +69,8 @@ class Window(models.Model):
     size = models.ForeignKey(WindowSize, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='window_images/')
+    class Meta:
+        verbose_name_plural = '창문들'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -91,7 +93,7 @@ class Door(models.Model):
     image = models.ImageField(upload_to='door_images/')
 
     class Meta:
-        verbose_name_plural = '문 제품'
+        verbose_name_plural = '문 '
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'quotes.apps.QuotesConfig',
     'configurations.apps.ConfigurationsConfig',
     'user.apps.UserConfig',
+    'crispy_forms',
+    
     
 ]
 
@@ -103,7 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
