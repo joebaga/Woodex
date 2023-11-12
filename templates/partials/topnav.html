@@ -29,7 +29,7 @@
       <div class="card-body">
         <h5 class="card-title">가격</h5>
         <hr>
-
+<!-- Jun link to 가격-->
         <a href="{% url 'price-page' %}" class="card-link">link to 가격</a>
       </div>
 
@@ -38,11 +38,12 @@
       <div class card-body="">
         <h5 class="card-title">설정</h5>
         <hr>
-        <a href="#" class="card-link">link to 설정</a>
+        <a href="{% url 'config-page' %}" class="card-link">link to 설정</a>
       </div>
     </div>
     <div class="container p-5 row justify-content-center" style="background-color: #b1bcf0; ">
 
+      <!-- Jun link to 주문하기-->
       <div class="card p-3 rounded-lg m-3" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">주문하기</h5>
@@ -55,9 +56,10 @@
           <h5 class="card-title">고객</h5>
           <hr>
 
-          <a href="#" class=" card-link">link to 고객</a>
+          <a href="{% url 'customer-page' %}" class=" card-link">link to 고객</a>
         </div>
 
+        <!-- Jun link to 안내-->
       </div>
       <div class="card p-3 rounded-lg m-3" style="width: 18rem;">
         <div class="card-body">
