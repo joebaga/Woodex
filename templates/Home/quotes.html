@@ -1,4 +1,5 @@
 {%block content%}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,6 +22,7 @@
           woodex
         </a>
       </nav>
+      
       <nav class="navbar navbar-expand-lg navbar-light position-static" style="background-color: #596ed4;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -36,7 +38,7 @@
 
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">가격</a>
+              <a class="nav-link text-dark" id="profile-tab" href="{% url 'price' %}">가격</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-dark" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">주문하기</a>
@@ -90,13 +92,146 @@
                 </div>
                 <hr class=" bg-dark" style="height: 1px;">
                 <div class="d-flex flex-row bd-highlight mb-3">
-                  <h4 class="text-primary bd-highlight mr-3">품목 선텍</h4>
+                  <h4 class="text-primary bd-highlight mr-4">품목 </h4>
+                  <h4 class=" mr-5 text-primary bd-highlight ">선텍</h4>
                   
                 </div>
                 <hr class="bg-dark" style="height: 1px;">
+                <div class="d-flex align-items-center bd-highlight mb-3">
+                  <span class="text-primary">품목 : </span>
+                  <div class="dropdown show p-3 ml-3">
+                    <a class="btn btn-secondary dropdown-toggle bg-light text-dark" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      config price quotes 
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Action</a>
+      
+                      <a class="dropdown-item" href="#">last</a>
+                    </div>
+                    <i class="p-2 bd-highlight mr-3 fa fa-search"></i>
+                  </div>
+                  <span class="p-2 bd-highlight mr-3 text-primary justify-content-between ">설명 :</span>
+                  <span class="p-2 bd-highlight  mr-3 text-primary justify-content-between">Material ID :</span>
+                  
+                </div>
+
+                <div class="d-flex align-items-center bd-highlight mb-3">
+                  <span class="text-primary"> 개수 : </span>
+                  <div class="dropdown show p-3 ml-3">
+                    <a class="btn btn-secondary bg-light text-dark" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      number 
+                    </a>
+                    
+                  </div>
+                  <span class="p-2 bd-highlight mr-3 text-primary justify-content-between ">설명 :</span>
+                  <span class="p-2 bd-highlight  mr-3 text-primary justify-content-between">Material ID :</span>
+                  
+                </div>
+                <h4 class="text-primary bd-highlight mr-4">구성 옵션 </h4>
+                <hr class="bg-dark" style="height: 1px;">
+                  <div class="btn-group mr-3">
+                    <span class="text-primary mr-4 ">재료 종류 : </span>
+                    <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      재료 종류
+                    </button>
+                    <div class="dropdown-menu">
+                      ...
+                    </div>
+                  </div>
+                  <div class="btn-group mr-3">
+                    <span class="text-primary mr-4 ">재료 길리 : </span>
+                    <button class=" btn btn-secondary btn-lg" type="button">
+                      재료 길리
+                    </button>
+                    <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="mr-3 sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                      ...
+                    </div>
+                    
+                  </div>
+                  <div class="btn-group">
+                    <span class="text-primary mr-4 ">창문 종류 : </span>
+                    <button class="btn btn-secondary btn-lg" type="button">
+                      창문 종류
+                    </button>
+                    <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                      ...
+                  </div>
+              
+
+                <!-- joel this is the dropdown box for........! -->
+                
               </div>
+              <div class= "p-4 row mr-3">
+                <div class="btn-group mr-3 ">
+                  <span class="text-primary mr-4 ">재료 폭 : </span>
+                  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    재료 폭
+                  </button>
+                  <div class="dropdown-menu">
+                    ...
+                  </div>
+                </div>
+                <div class="btn-group mr-3">
+                  <span class="text-primary mr-4 ">문 종류 : </span>
+                  <button class=" btn btn-secondary btn-lg" type="button">
+                    문 종류
+                  </button>
+                  <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-3 sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu">
+                    ...
+                  </div>
+                  
+                </div>
+                <div class="btn-group ">
+                  <span class="text-primary mr-4 ">재료 무게 : </span>
+                  <button class="btn btn-secondary btn-lg" type="button">
+                    재료 무게
+                  </button>
+                  <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu">
+                    ...
+                </div>
+
+              </div>
+              <!-- last row ! -->
+              
+              
               
             </div>
+            <hr class="bg-dark" style="height: 1px;">
+                <div class="row justify-content-center mt-3">
+                  <div class="d-flex flex-row bd-highlight mb-3">
+                      <button type="button" class="p-2 bd-highlight border border-dark mr-3">
+                          <i class="fa fa-cog"></i> 견적
+                      </button>
+                      <button class="p-2 bd-highlight border border-dark mr-3">
+                          <i class="fa fa-plus"></i> 추가하기
+                      </button>
+                      <button class="p-2 bd-highlight border border-dark mr-3">
+                          <i class="fa fa-cog"></i> 다시 견적내기
+                      </button>
+                      <button class="p-2 bd-highlight border border-dark mr-3">
+                          <i class="fa fa-clipboard"></i> 견적 저장하기
+                      </button>
+                      <button class="p-2 bd-highlight border border-dark">
+                          <i class="fa fa-upload"></i> 품목 추가하기
+                      </button>
+                  </div>
+                </div>
+          
           </div>
       
     <!-- Optional JavaScript; choose one of the two! -->

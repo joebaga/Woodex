@@ -14,7 +14,7 @@
   <body style="background-color: #b1bcf0;">
     <header role="banner">
       <nav class="navbar navbar-light" style="background-color: #b1bcf0;">
-        <a class="navbar-brand justify-content-center" href="{% url 'user-login' %}">
+        <a class="navbar-brand justify-content-center" href="{% url 'index' %}">
           <img src="https://woodex.co.kr/web/upload/category/editor/2019/08/27/b8359dfe469202dd93ca5eadcf0b2950.png" width="30" height="30" class="d-inline-block align-top" alt="woodex">
           woodex
         </a>
@@ -36,7 +36,8 @@
 
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">가격</a>
+              <a class="nav-link text-dark" id="profile-tab" href="{% url 'price' %}">가격</a>
+              
             </li>
             <li class="nav-item">
               <a class="nav-link text-dark" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">주문하기</a>

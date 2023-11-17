@@ -1,28 +1,29 @@
 
-
+{% load crispy_forms_tags %}
 {%block content%}
 <nav class="navbar navbar-light " style="background-color: #b1bcf0;">
+
     <a class="navbar-brand" href="{% url 'user-login' %}">
       <img src="https://woodex.co.kr/web/upload/category/editor/2019/08/27/b8359dfe469202dd93ca5eadcf0b2950.png" width="30" height="30" class="d-inline-block align-top" alt="">
       woodex
     </a>
   </nav>
-<div class="container">
-    <div class= "row mt-5">
-      <div class= "col-md-6 offset-md-3">
-        <div class ="border p-3" style="background-color: #b1bcf0;">
-          <h3>LOGIN</h3>
-          <hr>
-          <form method = "POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <hr>
-            <a href={%url 'user_register'%}>register here</a>
-            <hr>
-            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-                <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-                <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <!------ Include the above in your HEAD tag ---------->
+      <div class="container" >
+          <div class= "row mt-5">
+            <div class= "col-md-6 offset-md-3">
+              <div class ="border p-3" style="background-color: #b1bcf0;">
+                <h3>로그인</h3>
+                <hr>
+                <form method = "POST">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <hr>
+                  <a href={%url 'user_register'%}>register here</a>
+                  <hr>
+                  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+                      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+                      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                      <!------ Include the above in your HEAD tag ---------->
 
                 
                     <div id="login">
@@ -44,5 +45,6 @@
       </div>
     </div>
   </div>
+  
 
 {% endblock %}

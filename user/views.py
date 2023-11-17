@@ -1,45 +1,57 @@
-#from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
-
-# Create your views here.
-
-#def register(request):
- #   form = UserCreationForm()
-  #  return render(request,'User/register.html',{'form':form})
+# user/views.py
+from django.shortcuts import render
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .forms import CustomerRegistrationForm
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from .forms import CustomerRegistrationForm
 from .models import CustomerProfile
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
+
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.request.user.is_authenticated:
+            if self.request.user.is_staff and self.request.user.is_superuser:
+                return redirect('admin-page') 
+            else:
+                return redirect('index')
+        return response
 
 def register(request):
     if request.method == 'POST':
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            
-            # Check if a user with the same email already exists
+
             if User.objects.filter(email=email).exists():
-                # Redirect to an error page or display an error message
                 return render(request, 'User/error_exist.html')
 
-            user = form.save(commit=False)
-            user.save()
+            user, created = User.objects.get_or_create(email=email, defaults=form.cleaned_data)
 
-            # Optionally, you can save other user details to the user's profile
-            customer_profile = CustomerProfile(
-                user=user,
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'],
-                company_name=form.cleaned_data['company_name'],
-                phone_number=form.cleaned_data['phone_number'],
-                kakao_talk_login=form.cleaned_data['kakao_talk_login']
-            )
-            customer_profile.save()
+            if not created:
+                return render(request, 'User/error_exist.html')
+
+            if not hasattr(user, 'customerprofile'):
+                customer_profile = CustomerProfile(
+                    user=user,
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name'],
+                    company_name=form.cleaned_data['company_name'],
+                    phone_number=form.cleaned_data['phone_number'],
+                    kakao_talk_login=form.cleaned_data['kakao_talk_login']
+                )
+                customer_profile.save()
 
             login(request, user)
-            return redirect('User/register.html')  
+            return redirect('user_register')  # Redirect to the user's profile page
     else:
         form = CustomerRegistrationForm()
+
     return render(request, 'User/register.html', {'form': form})
+@login_required
+def profile(request):
+    user_profile = request.user.customerprofile
+    return render(request, 'user/profile.html', {'user_profile': user_profile})
+
+
