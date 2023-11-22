@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from .forms import CustomerRegistrationForm
+from .forms import CustomerRegistrationForm, UserUpdateForm, ProfileUpdateForm
 from .models import CustomerProfile
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
@@ -54,4 +54,27 @@ def profile(request):
     user_profile = request.user.customerprofile
     return render(request, 'user/profile.html', {'user_profile': user_profile})
 
+
+@login_required
+def profile_update(request):
+    print(request.POST)
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.customerprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            print("Forms are valid. Data saved.")
+            return redirect('profile.html')
+        else:
+            print("Forms are invalid. Data not saved.")
+    else:
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm( instance=request.user.customerprofile)
+
+    context = {
+        'User_form' : user_form,
+        'profile_form' : profile_form,
+    }
+    return render(request, 'user/profile_update.html',context)
 

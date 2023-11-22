@@ -1,61 +1,273 @@
 {% load static %}
+{%block content%}
 <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Include jQuery before your script -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static '/style.css' %}">
-    <title>{% block title %}{% endblock%}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <title></title>
+    <style>
+      /* Add your styles here */
+      .config-container {
+          text-align: center;
+          padding: 20px;
+      }
+
+      .popup-container {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .popup-content {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          padding: 20px;
+      }
+
+      .close {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 20px;
+          cursor: pointer;
+      }
+      
+  </style>
+  <nav class="navbar navbar-light " style="background-color: #b1bcf0;">
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <img src="https://woodex.co.kr/web/upload/category/editor/2019/08/27/b8359dfe469202dd93ca5eadcf0b2950.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      woodex
+    </a>
+  </nav>
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </head>
-
   <body>
-   <!-- Large button groups (default and split) -->
-   
+    
+      <div class="config-container">
+        
+        <!-- Add your configuration options here -->
 
-<div class="btn-group">
-  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Large button
-  </button>
-  <div class="dropdown-menu">
-    ...
-  </div>
-</div>
-<div class="btn-group">
-  <button class="btn btn-secondary btn-lg" type="button">
-    Large split button
-  </button>
-  <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <div class="dropdown-menu">
-    ...
-  </div>
-</div>
+        <!-- Button to trigger the popup -->
+        
+        <button id="openPopupBtn">continue configuration</button>
+        <button >
+          <a href="{% url 'quotes-page' %}" class=" p-2 ">
+            Go back
+        </a>
+        </button>
+        <hr>
 
-<!-- Small button groups (default and split) -->
-<div class="btn-group">
-  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Small button
-  </button>
-  <div class="dropdown-menu">
-    ...
-  </div>
-</div>
-<div class="btn-group">
-  <button class="btn btn-secondary btn-sm" type="button">
-    Small split button
-  </button>
-  <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <div class="dropdown-menu">
-    ...
-  </div>
-</div>
+        <!-- The popup container -->
+        <div class="popup-container" id="popup" style="overflow-y: auto; ">
+          <div class="p-4 popup-content" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow-y: auto; max-height: 90vh; width: 80%; max-width: none;">
+              <span class="close" id="closePopupBtn">&times;</span>
+              <div class="d-flex align-items-center">
+                  <i class="fa fa-cog text-primary" style="font-size: 2.0rem; margin-right: 5px;"></i>
+                  <span style="font-size: 2.0rem;">configure</span>
+              </div>
+              <hr class="bg-dark" style="height: 1px;">
+              <div class="row" >
+                <div class="col-12 mb-3" style="margin-right: 5px;">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-light mr-4">Continue</button>
+                        <button type="button" class="btn btn-light mr-4">Cancel</button>
+                    </div>
+                    <span class="mx-2">|</span>
+                    <i class="fa fa-print"></i>
+                    <span class="mx-2">|</span>
+                    <span class="mx-2">price : </span>
+                </div>
+            </div>
+            <hr class="bg-dark" style="height: 1px;">
+            <hr>
+                <!-- configuration div -->
+                                <!-- Section: Split screen -->
+                <section class="">
+
+                  <div class="container-fluid px-0">
+                    <div class="row g-0">
+
+                      <!-- First column -->
+                      <div class="col-lg-6 vh-100 bg-light" style="overflow-y: auto;">
+                        <div class="card p-4">
+                          <div class="card-header">
+                              <p class="card-header-text text-primary">style and size</p>
+                          </div>
+                          <div class="card-block">
+                              <div class="row " id="sortable">
+                                  <div class="p-2 card col-md-6 m-b-20" draggable="false">
+                                      <a href="#" class="text-decoration-none">
+                                          <div class="card-sub border border-primary p-2">
+                                              <img class="card-img-top img-fluid" src="https://www.theaterseatstore.com/blog/wp-content/uploads/2020/10/single_doors_imgleft.svg" alt="Card image cap">
+                                              <div class="card-block">
+                                                  <p class="card-text">first</p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </div>
+                                  <div class="p-2 col-md-6 card">
+                                      <a href="#" class="text-decoration-none">
+                                          <div class="card-sub border border-primary p-2 m-b-20">
+                                              <img class="card-img-top img-fluid" src="https://www.metalbuildingdoors.com/images/3070-steelwalk-detail.jpg" alt="Card image cap">
+                                              <div class="card-block">
+                                                  <p class="card-text">second</p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </div>
+                                  <div class="p-2 col-md-6">
+                                    <a href="#" class="text-decoration-none">
+                                        <div class="card-sub border border-primary p-2 m-b-20">
+                                            <img class="card-img-top img-fluid" src="https://www.metalbuildingdoors.com/images/6070-steelwalk-detail.jpg" alt="Card image cap">
+                                            <div class="card-block">
+                                                <p class="card-text">second</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="p-2 col-md-6">
+                                  <a href="#" class="text-decoration-none">
+                                      <div class="card-sub border border-primary p-2 m-b-20">
+                                          <img class="card-img-top img-fluid" src="https://www.metalbuildingdoors.com/images/3070-glassentry-detail.jpg" alt="Card image cap">
+                                          <div class="card-block">
+                                              <p class="card-text">second</p>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                                  <!-- Repeat the pattern for other cards -->
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <hr>
+                      <div class="container" style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <span class="mx-2" style="margin-right: 10px;">width : </span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                            <i class="mr-4 fa fa-search"></i>
+                        </div>
+                        <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <span class="mx-2" style="margin-right: 10px;">height :</span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                            <i class="mr-4 fa fa-search"></i>
+                        </div>
+                        
+
+                        <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <span class="mx-2" style="margin-right: 10px;">thickness :</span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                            <i class="mr-4 fa fa-search"></i>
+                        </div>
+                       <hr class="bg-dark" style="height: 1px;">
+                        <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <span class="mx-2" style="margin-right: 10px;">S width :</span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                        </div>
+                        <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <span class="mx-2" style="margin-right: 10px;">Price:</span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                        </div>
+                        <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <span class="mx-2" style="margin-right: 10px;">Price:</span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                        </div>
+                        <div class="price-input" style="display: flex; align-items: center;">
+                            <span class="mx-2" style="margin-right: 10px;">Price:</span>
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
+                        </div>
+                    </div>
+
+
+
+                      </div>
+                      <!-- First column -->
+
+                      <!-- Second column -->
+                      
+                      <div class="col-lg-6 vh-100 d-flex align-items-center justify-content-center">
+                        
+                        <div class="card p-4">
+                          <div class="card-header">
+                              <p class="card-header-text text-primary">
+                                <i class="mr-4 fa fa-arrow-left"></i> <!-- Left arrow -->
+                                <i class="mr-4 fa fa-arrow-right"></i> <!-- Right arrow -->
+                                <i class="mr-4 fa fa-arrow-up"></i> <!-- Up arrow -->
+                                <i class="mr-4 fa fa-arrow-down"></i> <!-- Down arrow -->
+                                <i class="mr-4 fa fa-refresh"></i> <!-- Restart or Refresh icon -->
+                                
+                              </p>
+                          </div>
+                        <!-- Your existing code... -->
+                    
+                        <!-- Display the image directly in the second column -->
+                        <div class="img-container" style="height: 80vh; max-width: 100%; text-align: center;">
+                            <img id="modalImage" class="img-fluid" style="max-width: 100%; height: 100%;" alt="...">
+                        </div>
+                    </div>
+                      
+
+                      </div>
+                      <div class="vr vr-blurry" style="height: 250px;"></div>
+                      <!-- Second column -->
+
+                    </div>
+                  </div>
+
+                </section>
+<!-- Section: Split screen -->
+                <!-- Add your popup content here -->
+            </div>
+        </div>
+        
+        <div class="container">
+          <img src="https://woodex.shop/web/upload/NNEditor/20191226/pimapen.jpg" class="img-fluid" alt="Responsive image">
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Open popup
+            document.getElementById('openPopupBtn').addEventListener('click', function () {
+                document.getElementById('popup').style.display = 'block';
+            });
+
+            // Close popup
+            document.getElementById('closePopupBtn').addEventListener('click', function () {
+                document.getElementById('popup').style.display = 'none';
+            });
+        });
+        $(document).ready(function () {
+          // Handle click on image in the first column
+          $('.card-sub').on('click', function () {
+              // Get the source of the clicked image
+              var imgSrc = $(this).find('img').attr('src');
+      
+              // Set the source of the image in the second column
+              $('#modalImage').attr('src', imgSrc);
+          });
+      });
+    </script>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -72,4 +284,4 @@
 </html>
 
 
-
+{%endblock%}

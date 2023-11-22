@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!-- Bootstrap icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
 
 
     <title>{% block title %}Quotes page{% endblock %}</title>
   </head>
   <body>
     <nav class="navbar navbar-light " style="background-color: #b1bcf0;">
-        <a class="navbar-brand" href="{% url 'user-login' %}">
+        <a class="navbar-brand" href="{% url 'index' %}">
           <img src="https://woodex.co.kr/web/upload/category/editor/2019/08/27/b8359dfe469202dd93ca5eadcf0b2950.png" width="30" height="30" class="d-inline-block align-top" alt="">
           woodex
         </a>
@@ -213,9 +214,11 @@
             </div>
             <hr class="bg-dark" style="height: 1px;">
                 <div class="row justify-content-center mt-3">
-                  <div class="d-flex flex-row bd-highlight mb-3">
-                      <button type="button" class="p-2 bd-highlight border border-dark mr-3">
+                  <div class="d-flex flex-row bd-highlight mb-3" >
+                      <button type="button" class="p-2 mr-3" >
+                        <a href="{% url 'config' %}" class=" p-2  mr-3">
                           <i class="fa fa-cog"></i> 견적
+                      </a>
                       </button>
                       <button class="p-2 bd-highlight border border-dark mr-3">
                           <i class="fa fa-plus"></i> 추가하기
