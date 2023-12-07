@@ -1,8 +1,13 @@
+import os
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
+from user.models import CustomerProfile
+from .models import Window, Door
+import csv
+import pandas as pd
 
 class CustomLoginView(LoginView):
     def form_valid(self, form):
@@ -34,7 +39,45 @@ def quotes(request):
 @login_required(login_url='user-login')
 def config(request):
     return render(request, 'Home/conf.html')
-
+@login_required(login_url='user-login')
 def price(request):
-    return render(request,'Home/price.html' )
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(BASE_DIR, 'excel_file/firstExcel.xlsx')
 
+    try:
+        # Specify the sheet name you want to read
+        sheet_name = '임가공 단가표'
+        df = pd.read_excel(file_path, sheet_name=sheet_name)
+        data = df.to_dict(orient='records')
+    except FileNotFoundError:
+        data = []  # Handle the case where the file is not found
+    except pd.errors.EmptyDataError:
+        data = []  # Handle the case where the specified sheet is empty
+
+    return render(request, 'Home/price.html', {'data': data})
+
+@login_required(login_url='user-login')
+def download_csv(request, product_type):
+    if product_type == 'windows':
+        products = Window.objects.all()
+        filename = 'windowPrices.xlsx'
+    elif product_type == 'doors':
+        products = Door.objects.all()
+        filename = 'doorPrices.xlsx'
+    else:
+        # Handle invalid product type (optional)
+        return HttpResponse("Invalid product type specified")
+
+    # Convert queryset to a pandas DataFrame
+    df = pd.DataFrame(list(products.values()))
+
+    # Create Excel file
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename={filename}'
+    df.to_excel(response, index=False, sheet_name='Products')
+
+    return response
+
+@login_required(login_url='user-login')
+def order(request):
+    return render(request,'Home/order.html' )

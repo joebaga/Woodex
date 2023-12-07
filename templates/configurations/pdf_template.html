@@ -1,3 +1,5 @@
+{%load static%}
+{%block content%}
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,10 +10,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title></title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <h1>User Configuration</h1>
+    <p>User : {{ user_profile.user.username }}</p>
+    <p>First Name : {{ user_profile.first_name }}</p>
+    <p>company : {{ user_profile.company_name }}</p>
+    <!-- Add other user profile details as needed -->
+
+    <h2>Configuration Details</h2>
+    <p>Selected Windows: {% for window in configuration.selected_windows.all %}{{ window.name }}, {% endfor %}</p>
+    <p>Selected Doors: {% for door in configuration.selected_doors.all %}{{ door.name }}, {% endfor %}</p>
+    <!-- Add other configuration details as needed -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -27,3 +38,4 @@
     -->
   </body>
 </html>
+{%endblock%}

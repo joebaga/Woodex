@@ -88,8 +88,8 @@
               <div class="row" >
                 <div class="col-12 mb-3" style="margin-right: 5px;">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-light mr-4">Continue</button>
-                        <button type="button" class="btn btn-light mr-4">Cancel</button>
+                        <button type="button" class="btn btn-primary mr-4">Continue</button>
+                        <button type="button" class="btn btn-primary mr-4">Cancel</button>
                     </div>
                     <span class="mx-2">|</span>
                     <i class="fa fa-print"></i>
@@ -97,7 +97,23 @@
                     <span class="mx-2">price : </span>
                 </div>
             </div>
+             <!-- configuration div -->
             <hr class="bg-dark" style="height: 1px;">
+            <div class="row">             
+                <div class="d-flex justify-content-end col-lg-12">
+                    <span class="mx-2 text-primary">Main Option </span>
+                    <span class="mx-2 text-primary"> | </span>
+                    <span class="mx-2 text-primary">STYLE & DiMENSION </span>
+                    <span class="mx-2">|</span>
+                    <i class="mx-2 fa fa-share" style="font-size: 1.5rem;"></i>
+                    <i class="mx-2 fa fa-book" style="font-size: 1.5rem;"></i>
+                    <i class="mx-2 fa fa-plus" style="font-size: 1.5rem;"></i>
+                    <i class="mx-2 fa fa-info" style="font-size: 1.5rem;"></i>
+                    <i class="mx-2 fa fa-image" style="font-size: 1.5rem;"></i>
+                    <i class="mx-2 fa fa-save" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+            
             <hr>
                 <!-- configuration div -->
                                 <!-- Section: Split screen -->
@@ -116,7 +132,7 @@
                               <div class="row " id="sortable">
                                   <div class="p-2 card col-md-6 m-b-20" draggable="false">
                                       <a href="#" class="text-decoration-none">
-                                          <div class="card-sub border border-primary p-2">
+                                          <div class="card-sub  p-2">
                                               <img class="card-img-top img-fluid" src="https://www.theaterseatstore.com/blog/wp-content/uploads/2020/10/single_doors_imgleft.svg" alt="Card image cap">
                                               <div class="card-block">
                                                   <p class="card-text">first</p>
@@ -126,7 +142,7 @@
                                   </div>
                                   <div class="p-2 col-md-6 card">
                                       <a href="#" class="text-decoration-none">
-                                          <div class="card-sub border border-primary p-2 m-b-20">
+                                          <div class="card-sub  p-2 m-b-20">
                                               <img class="card-img-top img-fluid" src="https://www.metalbuildingdoors.com/images/3070-steelwalk-detail.jpg" alt="Card image cap">
                                               <div class="card-block">
                                                   <p class="card-text">second</p>
@@ -136,7 +152,7 @@
                                   </div>
                                   <div class="p-2 col-md-6">
                                     <a href="#" class="text-decoration-none">
-                                        <div class="card-sub border border-primary p-2 m-b-20">
+                                        <div class="card-sub  p-2 m-b-20">
                                             <img class="card-img-top img-fluid" src="https://www.metalbuildingdoors.com/images/6070-steelwalk-detail.jpg" alt="Card image cap">
                                             <div class="card-block">
                                                 <p class="card-text">second</p>
@@ -146,7 +162,7 @@
                                 </div>
                                 <div class="p-2 col-md-6">
                                   <a href="#" class="text-decoration-none">
-                                      <div class="card-sub border border-primary p-2 m-b-20">
+                                      <div class="card-sub  p-2 m-b-20">
                                           <img class="card-img-top img-fluid" src="https://www.metalbuildingdoors.com/images/3070-glassentry-detail.jpg" alt="Card image cap">
                                           <div class="card-block">
                                               <p class="card-text">second</p>
@@ -188,14 +204,22 @@
                             <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
                         </div>
                         <div class="price-input" style="display: flex; align-items: center; margin-bottom: 10px;">
-                            <span class="mx-2" style="margin-right: 10px;">Price:</span>
+                            <span class="mx-2" style="margin-right: 10px;">Size:</span>
                             <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
                         </div>
                         <div class="price-input" style="display: flex; align-items: center;">
-                            <span class="mx-2" style="margin-right: 10px;">Price:</span>
+                            <span class="mx-2" style="margin-right: 10px;">Discount:</span>
                             <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber">
                         </div>
+                        
                     </div>
+                    <form method = "POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ conf_form.as_p  }}
+                        <hr>
+                        <input class="btn btn-primary" type="submit" value="save">
+
+                    </form>
 
 
 

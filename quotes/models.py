@@ -68,6 +68,7 @@ class Window(models.Model):
     style = models.ForeignKey(WindowStyle, on_delete=models.CASCADE)
     size = models.ForeignKey(WindowSize, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
     image = models.ImageField(upload_to='window_images/')
     class Meta:
         verbose_name_plural = '창문들'
@@ -90,6 +91,7 @@ class Door(models.Model):
     style = models.ForeignKey(DoorStyle, on_delete=models.CASCADE)
     size = models.ForeignKey(DoorSize, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
     image = models.ImageField(upload_to='door_images/')
 
     class Meta:
